@@ -1,18 +1,60 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="hellow">
+    <div @click="clickMe" :class="[colorset, bgcolor]"> I am Red </div>
+    <input type="text" :abcd="bgcolor" v-model="newVal" @focus="iamFocus" :class="focusdata">
+   
+
+     
+   
+    <i-color-comp v-for="(item, key) in 4" :key="key"></i-color-comp>
+    
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import colorComp from './components/Color.vue'
 
 export default {
-  name: 'App',
+
+  data () {
+    return {
+      name: 'abc',
+      age: 22,
+      newAge: 0,
+      colorset: 'color', // red
+      bgcolor: 'bg',
+      newVal : 400,
+      focusdata: ''
+    }
+  },
+  methods: {
+    clickMe () {
+      let results = this.colorset;
+      this.colorset = results == 'color' ? "colorBlue" : 'color'
+     
+    },
+    iamFocus () {
+      this.focusdata = "colorBlue";
+    }
+  },
+  beforeCreate () {
+    console.log("beforeCreate")
+  },
+  created () {
+    console.log("created")
+  },
+  mounted () {
+    console.log("mounted")
+
+    setTimeout(() => {
+      this.age = 88;
+    }, 3000)
+  },
   components: {
-    HelloWorld
+    'i-color-comp': colorComp
   }
+  
 }
 </script>
 
@@ -25,4 +67,14 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+.color {
+  color: red;
+}
+.colorBlue {
+ color: blue
+}
+.bg {
+  background-color: black;
+}
+
 </style>
