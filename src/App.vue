@@ -3,10 +3,11 @@
     <div @click="clickMe" :class="[colorset, bgcolor]"> I am Red </div>
     <input type="text" :abcd="bgcolor" v-model="newVal" @focus="iamFocus" :class="focusdata">
    
-
+     <div>{{age}} is odd number </div>
      
-   
-    <i-color-comp v-for="(item, key) in 4" :key="key"></i-color-comp>
+   <hr/>
+   <br/>
+    <i-color-comp></i-color-comp>
     
   </div>
 </template>
