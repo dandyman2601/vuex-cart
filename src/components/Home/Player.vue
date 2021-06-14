@@ -1,7 +1,6 @@
 <template>
     <div>
-        app.vue
-        <router-view></router-view>
+        player.vue
     </div>
 </template>
 

@@ -1,7 +1,7 @@
 <template>
     <div>
-        app.vue
-        <router-view></router-view>
+        Payment.vue
+        <router-link :to="{name: 'home'}">abcd</router-link>
     </div>
 </template>
 
