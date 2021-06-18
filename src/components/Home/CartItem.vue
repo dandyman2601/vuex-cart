@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>cartItem</h1>
-        <h1 v-for="(item, index) in getItems" :key="index">
+        <h1 v-for="(item, index) in getItems" :key="index" @click="sendData(item)">
             {{item}}
         </h1>
     </div>
@@ -9,6 +9,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
+
+import { EVENT_BUS } from "@/EventBus/eventBus"
 
 export default {
     watch: {
@@ -19,12 +21,22 @@ export default {
    computed: { 
        ...mapGetters(['getItems'])
    },
-//    methods: {
-//        ...mapMutations(['setItems'])
-//    },
-   mounted () { 
+   methods: {
+       sendData(item) {
+           console.log(item)
+           EVENT_BUS.$emit("send-data", item)
+       }
+   },
+   mounted () {
+         console.log("cartitem", " =====> mounted")    
 
-    console.log("this.getItems=cartItems", this.getItems)
+   },
+   created () { 
+
+  console.log("cartitem", " =====>created")    
+
+     EVENT_BUS.$emit("send-data", 1111)
+
 
    } 
 }
