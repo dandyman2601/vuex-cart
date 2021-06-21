@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>cartItem</h1>
+        <h1 id="sm">cartItem</h1> {{name}}
         <h1 v-for="(item, index) in getItems" :key="index" @click="sendData(item)">
             {{item}}
         </h1>
@@ -13,6 +13,7 @@ import { mapGetters } from 'vuex'
 import { EVENT_BUS } from "@/EventBus/eventBus"
 
 export default {
+    props: ['name'],
     watch: {
         getItems(val) {
             console.log("val", val)
@@ -29,11 +30,15 @@ export default {
    },
    mounted () {
          console.log("cartitem", " =====> mounted")    
+           console.log("document.", document.getElementById("sm").innerHTML)
+
 
    },
    created () { 
 
   console.log("cartitem", " =====>created")    
+
+  console.log("document.", document.getElementById("sm").innerHTML)
 
      EVENT_BUS.$emit("send-data", 1111)
 

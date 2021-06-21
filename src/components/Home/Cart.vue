@@ -3,7 +3,7 @@
         cart {{add(800,200)}}
 
         <h1>{{name | capitalize }}</h1>
-        <item></item>
+        <item :name="name"></item>
     </div>
 </template>
 
@@ -33,8 +33,8 @@ export default {
        }
    },
    mounted () { 
+       
       console.log("cart.vue =====> mounted")
-
        console.log("this.getItems", this.getItems)
        this.setItems('orange');
        console.log("this.getItems", this.getItems)

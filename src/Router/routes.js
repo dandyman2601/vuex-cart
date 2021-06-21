@@ -27,6 +27,16 @@ const routes = [
         path: '/cart',
         component: () => import('../components/Home/Cart.vue'),
         name:'cart'
+    },
+    {   
+        path: '/binding',
+        component: () => import('../components/binding/Main.vue'),
+        name:'binding'
+    },
+    {   
+        path: '/css',
+        component: () => import('../components/Home/Css.vue'),
+        name:'CSS'
     }
 ]
 
