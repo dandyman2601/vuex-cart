@@ -1,6 +1,8 @@
 <template>
     <div>
         {{itemlist}}
+
+        cart => {{getCounter}}
         <router-view></router-view>
     </div>
 </template>
@@ -11,12 +13,18 @@ import { EVENT_BUS } from "@/EventBus/eventBus"
 import { interceptor } from "@/InterceptorHub/"
 console.log("interceptor", interceptor);
 
+import { mapGetters } from 'vuex'
+
+
 export default {
   
   data () {
       return { 
           itemlist: ''
       }
+  },
+  computed: {
+      ...mapGetters(['getCounter'])
   },
   created() {
      console.log("app.vue  =====> created")

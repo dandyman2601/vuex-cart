@@ -38,7 +38,7 @@ export default {
 
   console.log("cartitem", " =====>created")    
 
-  console.log("document.", document.getElementById("sm").innerHTML)
+//   console.log("document.", document.getElementById("sm").innerHTML)
 
      EVENT_BUS.$emit("send-data", 1111)
 

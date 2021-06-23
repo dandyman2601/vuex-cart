@@ -4,11 +4,24 @@
 
         <h1>{{name | capitalize }}</h1>
         <item :name="name"></item>
+
+
+        <div style="display:flex">
+
+                <div v-for="(product, index) in getProducts" :key="index">
+                    <img :src="product.image" style="width: 100px;">
+                    <p>{{product.title}}</p>
+                    <p>{{product.price}}</p>
+                    <button type="button" @click="actIncrement(product)">add</button>
+                    <hr/>
+                </div>
+
+        </div>
     </div>
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 import { Mixins } from "@/mixins/altMixins"
 
 
@@ -19,10 +32,15 @@ export default {
         }
     },
    computed: { 
-       ...mapGetters(['getItems'])
+       ...mapGetters(['getItems', 'getProducts', 'getCounter'])
    },
    methods: {
-       ...mapMutations(['setItems'])
+       ...mapMutations(['setItems', 'setProducts', 'setCounter']),
+       ...mapActions(['actGetProducts']),
+       actIncrement () {
+           let flag = this.getCounter;
+           this.setCounter(flag + 1)
+       }
    },
    filters: {
 
@@ -42,6 +60,11 @@ export default {
                   this.setItems('pineapple');
 
        }, 5000)
+
+       this.actGetProducts().then((res) => {
+           console.log("this.get", res)
+           this.setProducts(res.data)
+       })
 
    },
    created () {
