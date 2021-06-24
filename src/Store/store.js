@@ -6,14 +6,12 @@ Vue.use(Vuex);
 
  export const store = new Vuex.Store({
     state: {
-        items: ['apple'],
+        
         products: [],
         counter:0
     },
     mutations: {
-        setItems: (state, newItem) => {
-            (state.items).push(newItem)
-        },
+        
         setProducts: (state, newProdct) => {
             state.products = newProdct;
         },
@@ -22,9 +20,7 @@ Vue.use(Vuex);
         }
     },
     getters: {
-        getItems: (state) => {
-            return state.items
-        },
+       
         getProducts: (state) => {
             return state.products;
         },

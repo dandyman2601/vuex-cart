@@ -1,84 +1,76 @@
 <template>
     <div>
-        cart {{add(800,200)}}
-
-        <h1>{{name | capitalize }}</h1>
-        <item :name="name"></item>
-
-
         <div style="display:flex">
-
-                <div v-for="(product, index) in getProducts" :key="index">
-                    <img :src="product.image" style="width: 100px;">
-                    <p>{{product.title}}</p>
-                    <p>{{product.price}}</p>
-                    <button type="button" @click="actIncrement(product)">add</button>
-                    <hr/>
-                </div>
-
+            <div id="product_component" v-for="(product, index) in getProducts" :key="index">
+                <img :src="product.image">
+                <p>{{product.title}}</p>
+                <p>{{product.price}}</p>
+                <button type="button" @click="actIncrement(product)">add</button>
+                <button type="button" @click="actDecrement(product)">remove</button>
+                <hr/>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex'
-import { Mixins } from "@/mixins/altMixins"
-
 
 export default {
-    data () {
-        return {
-            name: "abcdef"
-        }
-    },
-   computed: { 
-       ...mapGetters(['getItems', 'getProducts', 'getCounter'])
+    
+   computed: {
+       ...mapGetters(['getProducts', 'getCounter'])
    },
    methods: {
-       ...mapMutations(['setItems', 'setProducts', 'setCounter']),
+       //spread operaters to get the mutators and actions from vuex store
+       ...mapMutations(['setProducts', 'setCounter']),
        ...mapActions(['actGetProducts']),
-       actIncrement () {
-           let flag = this.getCounter;
-           this.setCounter(flag + 1)
-       }
-   },
-   filters: {
+        
+        actIncrement () {
+            let flag = this.getCounter;
+            this.setCounter(flag + 1)
+        },
+        actDecrement () {
+            let flag = this.getCounter;
+            this.setCounter(flag - 1) 
+            if(flag<0){
+              alert("Can't go less than 0")
+              this.setCounter(0)
+            }
+            
+        }
+   },   
+   mounted () {
+        console.log("cart.vue =====> mounted") 
 
-       makeCapital (item) {
-           console.log(item);
-           return item.toUpperCase();
-
-       }
-   },
-   mounted () { 
-       
-      console.log("cart.vue =====> mounted")
-       console.log("this.getItems", this.getItems)
-       this.setItems('orange');
-       console.log("this.getItems", this.getItems)
-       setTimeout(() => {
-                  this.setItems('pineapple');
-
-       }, 5000)
-
-       this.actGetProducts().then((res) => {
-           console.log("this.get", res)
-           this.setProducts(res.data)
-       })
+        this.actGetProducts().then((res) => {
+        console.log("this.get", res)
+        this.setProducts(res.data)
+        })
 
    },
    created () {
-             console.log("cart.vue =====> created")
-
+        console.log("cart.vue =====> created")
    },
    components: {
-       'item': ()=>import('@/components/Home/CartItem.vue') 
-   },
-    mixins: [Mixins]
+     
+   },   
 }
 
 </script>
 
 <style scoped>
 
+#product_component{
+    border: 1px solid black;
+    text-align: center;
+    border-radius: 15px;
+    margin: 10px;
+    padding: 10px;
+    height: 100%;
+    
+}
+#product_component img{
+    width: 100%;
+}
 </style>
