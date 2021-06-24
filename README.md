@@ -1,4 +1,5 @@
-# dammu-vue
+# Vuex Cart & API
+
 
 ## Project setup
 ```
